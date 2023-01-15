@@ -16,9 +16,9 @@ scopes = [
 'https://www.googleapis.com/auth/spreadsheets',
 'https://www.googleapis.com/auth/drive'
 ]
-credentials = ServiceAccountCredentials.from_json_keyfile_name('C://Users//andki//OneDrive//Documents//python-auto-374505-199483e5ffb4.json')
+credentials = ServiceAccountCredentials.from_json_keyfile_name('C://Users//andki//OneDrive//Documents//credentials.json')
 file = gspread.authorize(credentials)
-sheet = file.open('Leads Test')
+sheet = file.open('Test')
 sheet = sheet.sheet1
 sheet.update_acell('F1', 'Date Lead Entered')
 sheet.update_acell('G1', 'Lead or Client')

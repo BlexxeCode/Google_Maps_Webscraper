@@ -11,7 +11,7 @@ import time
 driverPATH = 'C://Users//andki//Downloads//chromedriver_win32'
 browser = 'C://Users//andki//AppData//Local//Vivaldi//Application//vivaldi.exe'
 
-path = 'C://Users//andki//OneDrive//Documents//EGTLeads.xlsx'
+path = 'C://Users//andki//OneDrive//Documents//Leads.xlsx'
 wb = openpyxl.load_workbook(path)
 ws = wb.active
 
