@@ -12,7 +12,7 @@ import time
 #  turn into executable
 
 
-cnx = mysql.connector.connect(user='root', password='password@12',
+cnx = mysql.connector.connect(user='', password='',
                               host='localhost', database='business_lead')
 cursor = cnx.cursor()
 if cnx:
