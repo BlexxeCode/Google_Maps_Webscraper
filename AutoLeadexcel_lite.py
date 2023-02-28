@@ -8,14 +8,11 @@ import pandas as pd
 from datetime import date
 import time
 
-#future additions
-#  prompt to input maps url, business type, amount of businesses
-#  turn into executable
 
 
 browser = 'C://Users//andki//AppData//Local//Vivaldi//Application//vivaldi.exe'
 
-path = 'C://Users//andki//OneDrive//Documents//EGTLeads.xlsx'
+path = 'C://Users//andki//OneDrive//Documents//Leads.xlsx'
 wb = openpyxl.load_workbook(path)
 ws = wb.active
 
