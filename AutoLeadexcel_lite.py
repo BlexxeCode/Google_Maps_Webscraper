@@ -8,11 +8,14 @@ import pandas as pd
 from datetime import date
 import time
 
+#future additions
+#  prompt to input maps url, business type, amount of businesses
+#  turn into executable
 
 
 browser = 'C://Users//andki//AppData//Local//Vivaldi//Application//vivaldi.exe'
 
-path = 'C://Users//andki//OneDrive//Documents//Leads.xlsx'
+path = 'C://Users//andki//OneDrive//Documents//EGTLeads.xlsx'
 wb = openpyxl.load_workbook(path)
 ws = wb.active
 
@@ -24,7 +27,7 @@ url2 = input("Google Maps URL")
 Max = int(input('Amount of locations to obtain info from?'))
 start = int(input("Row to start at?"))
 
-driver = webdriver.Chrome('C://Users//andki//PycharmProjects//AutoLead//venv//chromedriver.exe', options=options)
+driver = webdriver.Chrome('C://Users//andki//OneDrive//Documents//chromedriver_win32//chromedriver.exe', options=options)
 
 
 url1 = 'https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm'
@@ -43,21 +46,24 @@ p = 1
 while p <= Max:
     list = driver.find_elements('css selector', 'div.dbg0pd')
     print(len(list))
-    start = len(list) - 20
-    for i in range(start, len(list)):
-        list[i].click()
+    for bis in list:
+        if bis.text == '':
+            continue
+        bis.click()
         time.sleep(3)
-
         try:
             name = driver.find_element('css selector', 'div.SPZz6b')
             print(name.text)
 
             address = driver.find_element('css selector', 'span.LrzXr')
+
+
             spl_address = address.text.split(',')
 
-            phone = driver.find_element('css selector', 'a.Od1FEc.dHS6jb').get_attribute('data-phone-number')
+            phone = driver.find_element('css selector', 'a.Od1FEc.mI8Pwc').get_attribute('data-phone-number')
 
-            webtest = driver.find_elements('css selector', 'a.dHS6jb')
+
+            webtest = driver.find_elements('css selector', 'a.mI8Pwc')
             if len(webtest) == 2:
                 web = webtest[-2].get_attribute('href')
             else:
@@ -65,10 +71,7 @@ while p <= Max:
         except selenium.common.exceptions.NoSuchElementException as e:
             continue
         try:
-            Btype = driver.find_element('xpath',
-                                        '/html/body/div[6]/div/div[9]/div[2]/div/div[2]/async-local-kp/div/div/div['
-                                        '1]/div/g-sticky-content-container/div/block-component/div/div[1]/div/div/div/div['
-                                        '1]/div/div/div[1]/div/div[2]/div[2]/div').text
+            Btype = driver.find_element('css selector', 'span.YhemCb').text
         except selenium.common.exceptions.NoSuchElementException as e:
             Btype = Type
 
@@ -86,7 +89,7 @@ while p <= Max:
             ws['P' + str(num)].value = spl_address[0]
         else:
             ws['P' + str(num)].value = spl_address[-2]
-        ws['Q' + str(num)].value = 'NY'
+        ws['Q' + str(num)].value = 'FL'
         ws['R' + str(num)].value = int(address.text[-5:])
 
         wb.save(path)
